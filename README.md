@@ -6,10 +6,10 @@ This is the recreation of the devcamper project built by Brad Travesy in his [co
 
 ## Installing this app
 
-## Clone this github repo in your terminal
+- Clone this github repo in your terminal
 
-### cd devCamper
+- cd devCamper
 
-### npm install
+- npm install
 
-### npm run dev
+- npm run dev
