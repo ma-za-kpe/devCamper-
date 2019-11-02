@@ -17,20 +17,7 @@ module.exports = {
             res.status(201).json({
                 success: true,
                 msg: `Bootcamp created`,
-                data: bootcamp
-            });
-        } catch (error) {
-            res.status(400).json({
-                success: false,
-                error: JSON.stringify(error, undefined, 2).bold
-            })
-
-        }
-        try {
-            const bootcamp = await Bootcamp.find(req.body);
-            res.status(201).json({
-                success: true,
-                msg: `Bootcamp created`,
+                count: bootcamp.length,
                 data: bootcamp
             });
         } catch (error) {
