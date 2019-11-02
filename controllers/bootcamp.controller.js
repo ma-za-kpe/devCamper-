@@ -33,7 +33,7 @@ module.exports = {
     // @desc  Get single bootcamps
     // @route  GET /api/v1/bootcamps/id
     // @access  Public
-    getOneBootcamps: async (req, res) => {
+    getOneBootcamps: async (req, res, next) => {
         try {
             const bootcamp = await Bootcamp.findById(req.params.id);
 
@@ -50,11 +50,11 @@ module.exports = {
                 data: bootcamp
             });
         } catch (error) {
-            res.status(400).json({
-                success: false,
-                error: JSON.stringify(error, undefined, 2).bold
-            })
-
+            // res.status(400).json({
+            //     success: false,
+            //     error: JSON.stringify(error, undefined, 2).bold
+            // })
+            next()
         }
     },
 

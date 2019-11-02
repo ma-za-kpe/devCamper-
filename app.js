@@ -42,13 +42,18 @@ app.use(cors());
 
 // error handler
 app.use(function (err, req, res, next) {
+  console.log(err.stack.red)
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.status(500).json({
+    success: false,
+    err: err.message
+  })
+  // res.render('error');
 });
 
 //This is here to handle all the uncaught promise rejections
