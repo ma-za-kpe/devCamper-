@@ -10,6 +10,7 @@ const pe = require('parse-error');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var bootcampsRouter = require('./routes/bootcamps');
+const errorResponse = require('./utils/errorResponse')
 
 var app = express();
 
@@ -42,7 +43,10 @@ app.use(cors());
 
 // error handler
 app.use(function (err, req, res, next) {
-  console.log(err.stack.red)
+
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   //get custome errors
   let error = {
@@ -50,21 +54,27 @@ app.use(function (err, req, res, next) {
   }
   error.message = err.message
 
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  //mongoose bad objectid
+  // mongoose bad object id
   if (err.name === 'CastError') {
     const message = `Bootcamp not found with id of ${err.value}`
-    error = message || 404
+    error = new errorResponse(message || 404)
   }
 
-  // render the error page
-  res.status(error.status || 500);
-  res.status(500).json({
+  //mongoose duplicate key
+  if (err.code === 11000) {
+    const message = `Duplicate field value`
+    error = new errorResponse(message || 404)
+  }
+
+  //mongoose validation error
+  if (err.name === 'ValidationError') {
+    const message = Object.values(err.errors).map(val => val.message);
+    error = new errorResponse(message || 404)
+  }
+
+  res.status(error.statusCode || 500).json({
     success: false,
-    error: error.message
+    error: error.message || 'server error'
   })
   // res.render('error');
 });
