@@ -43,15 +43,28 @@ app.use(cors());
 // error handler
 app.use(function (err, req, res, next) {
   console.log(err.stack.red)
+
+  //get custome errors
+  let error = {
+    ...err
+  }
+  error.message = err.message
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  //mongoose bad objectid
+  if (err.name === 'CastError') {
+    const message = `Bootcamp not found with id of ${err.value}`
+    error = message || 404
+  }
+
   // render the error page
-  res.status(err.status || 500);
+  res.status(error.status || 500);
   res.status(500).json({
     success: false,
-    err: err.message
+    error: error.message
   })
   // res.render('error');
 });

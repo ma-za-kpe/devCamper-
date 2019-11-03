@@ -54,7 +54,7 @@ module.exports = {
             //     success: false,
             //     error: JSON.stringify(error, undefined, 2).bold
             // })
-            next()
+            next(error)
         }
     },
 
@@ -72,10 +72,8 @@ module.exports = {
                 data: bootcamp
             });
         } catch (error) {
-            res.status(400).json({
-                success: false,
-                msg: `Bootcamp already created`
-            })
+            // 
+            next(error)
         }
 
     },
@@ -83,7 +81,7 @@ module.exports = {
     // @desc  Update bootcamp
     // @route  PUT /api/v1/bootcamps/id
     // @access  Private
-    updateBootcamps: async (req, res) => {
+    updateBootcamps: async (req, res, next, error) => {
         try {
 
             console.log("id is ........" + req.params.id)
@@ -94,10 +92,11 @@ module.exports = {
             });
 
             if (!bootcamp) {
-                return res.status(400).json({
-                    success: false,
-                    msg: `No bootcamp with this id in the db`,
-                });
+                // return res.status(400).json({
+                //     success: false,
+                //     msg: `No bootcamp with this id in the db`,
+                // });
+                next(error)
             }
 
             res.status(201).json({
@@ -106,10 +105,7 @@ module.exports = {
                 data: bootcamp
             });
         } catch (error) {
-            res.status(400).json({
-                success: false,
-                error: error
-            })
+            next(error)
         }
 
     },
@@ -121,10 +117,11 @@ module.exports = {
         const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id, req.body);
 
         if (!bootcamp) {
-            return res.status(400).json({
-                success: false,
-                msg: `No bootcamp with this id in the db`,
-            });
+            // return res.status(400).json({
+            //     success: false,
+            //     msg: `No bootcamp with this id in the db`,
+            // });
+            next()
         }
 
         res.status(201).json({
