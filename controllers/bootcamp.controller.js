@@ -18,7 +18,7 @@ module.exports = {
         };
 
         //fields to exclude
-        const removeFields = ['select']
+        const removeFields = ['select', 'sort']
 
         //loop over removeFields and delete them from the req   q   uery
         removeFields.forEach(param => delete reqQuery[param]);
@@ -38,6 +38,12 @@ module.exports = {
         if (req.query.select) {
             const fields = req.query.select.split(',').join(' ')
             query = query.select(fields)
+        }
+
+        // sort fields
+        if (req.query.sort) {
+            const sortFields = req.query.sort.split(',').join(' ')
+            query = query.sort(sortFields)
         }
 
         //excecuting query
