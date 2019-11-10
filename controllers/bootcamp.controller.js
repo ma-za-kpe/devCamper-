@@ -33,7 +33,7 @@ module.exports = {
 
         //finding resource
         query = Bootcamp.find(JSON.parse(queryStr)).populate({
-            path: 'course',
+            path: 'courses',
             select: 'name description'
         });
 
