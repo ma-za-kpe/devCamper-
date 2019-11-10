@@ -11,5 +11,9 @@ const router = express.Router({
 /* GET and POST  all bootcamp listing. */
 router.route('/').get(CourseController.getAllCourses);
 
+/* GET and POST  all bootcamp listing. */
+router.route('/').get(CourseController.getOneCourse).post(CourseController);
+
+
 
 module.exports = router;

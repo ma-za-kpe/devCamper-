@@ -33,5 +33,25 @@ module.exports = {
             data: courses
         });
 
-    })
+    }),
+
+    // @desc  Get single course
+    // @route  GET /api/v1/course/id
+    // @access  Public
+    getOneCourse: asyncHandler(async (req, res, next) => {
+        const course = await Course.findById(req.params.id).populate({
+            path: 'bootcamp',
+            select: 'name description'
+        });
+
+        if (!course) {
+            return next(new errorResponse(`course not found with id of ${req.params.id}`, 400))
+        }
+
+        res.status(201).json({
+            success: true,
+            data: course
+        });
+
+    }),
 };
