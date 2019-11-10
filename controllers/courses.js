@@ -36,7 +36,7 @@ module.exports = {
     }),
 
     // @desc  Get single course
-    // @route  GET /api/v1/course/id
+    // @route  GET /api/v1/courses/id
     // @access  Public
     getOneCourse: asyncHandler(async (req, res, next) => {
         const course = await Course.findById(req.params.id).populate({
@@ -55,16 +55,16 @@ module.exports = {
 
     }),
     // @desc  Create Course
-    // @route  POST /api/v1//:bootcampId/courses
+    // @route  POST /api/v1/bootcamps/:bootcampId/courses
     // @access  Private
     createCourse: asyncHandler(async (req, res, next) => {
 
         req.body.bootcamp = req.params.bootcampId;
 
-        const bootcamp = await Course.findById(req.params.bootcampId);
+        const bootcamp = await bootcamp.findById(req.params.bootcampId);
 
         if (!bootcamp) {
-            return next(new errorResponse(`course not found with id of ${req.params.id}`, 400))
+            return next(new errorResponse(`bootcamp not found with id of ${req.params.bootcampId}`, 400))
         }
 
         const course = await Course.create(req.body);
