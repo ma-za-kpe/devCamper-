@@ -10,7 +10,15 @@ module.exports = {
     // @access  Public
     getAllBootcamps: asyncHandler(async (req, res) => {
 
-        const bootcamp = await Bootcamp.find(req.body);
+        let query;
+
+        let queryStr = JSON.stringify(req.query);
+
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
+
+        query = Bootcamp.find(JSON.parse(queryStr));
+
+        const bootcamp = await query;
         res.status(201).json({
             success: true,
             msg: `Bootcamp created`,
@@ -101,7 +109,7 @@ module.exports = {
 
     // @desc      Get bootcamps within a radius
     // @route     GET /api/v1/bootcamps/radius/:zipcode/:distance
-    // @access  deleteBootcamps  Private
+    // @access    getBootcampsInRadius  Private
     getBootcampsInRadius: asyncHandler(async (req, res, next) => {
         const {
             zipcode,
