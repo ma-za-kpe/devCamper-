@@ -12,7 +12,7 @@ const router = express.Router({
 router.route('/').get(CourseController.getAllCourses).post(CourseController.createCourse);
 
 /* GET and POST  all bootcamp listing. */
-router.route('/:id').get(CourseController.getOneCourse);
+router.route('/:id').get(CourseController.getOneCourse).put(CourseController.updateCourse).delete(CourseController.deleteCourse);
 
 
 
