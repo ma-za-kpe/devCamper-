@@ -54,4 +54,27 @@ module.exports = {
         });
 
     }),
+    // @desc  Create Course
+    // @route  POST /api/v1//:bootcampId/courses
+    // @access  Private
+    createCourse: asyncHandler(async (req, res, next) => {
+
+        req.body.bootcamp = req.params.bootcampId;
+
+        const bootcamp = await Course.findById(req.params.bootcampId);
+
+        if (!bootcamp) {
+            return next(new errorResponse(`course not found with id of ${req.params.id}`, 400))
+        }
+
+        const course = await Course.create(req.body);
+
+        res.status(201).json({
+            success: true,
+            msg: `Course created Successfully ...`,
+            data: course
+        });
+
+    }),
+
 };

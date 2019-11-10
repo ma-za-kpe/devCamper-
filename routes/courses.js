@@ -9,10 +9,10 @@ const router = express.Router({
 });
 
 /* GET and POST  all bootcamp listing. */
-router.route('/').get(CourseController.getAllCourses);
+router.route('/').get(CourseController.getAllCourses).post(CourseController.createCourse);
 
 /* GET and POST  all bootcamp listing. */
-router.route('/').get(CourseController.getOneCourse).post(CourseController);
+router.route('/:id').get(CourseController.getOneCourse);
 
 
 
