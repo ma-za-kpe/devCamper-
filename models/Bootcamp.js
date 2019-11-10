@@ -125,7 +125,6 @@ BootcampSchema.pre('remove', async function (next) {
     next();
 });
 
-
 //reverse populate with virtuals (field called courses and an array for all the courses in that bootcamp.)
 BootcampSchema.virtual('courses', {
     ref: 'Course',
