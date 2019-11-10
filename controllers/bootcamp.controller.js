@@ -49,16 +49,37 @@ module.exports = {
         //paginationg
         const page = parseInt(req.query.page, 10) || 1;
         const limit = parseInt(req.query.limit, 10) || 1;
-        const skip = (page - 1) * limit;
+        const startIndex = (page - 1) * limit;
+        const endIndex = page * limit;
+        const totalDocs = await Bootcamp.countDocuments();
 
-        query = query.skip(skip).limit(limit);
+        query = query.skip(startIndex).limit(limit);
 
         //excecuting query
         const bootcamp = await query;
+
+        //pagination query
+        const pagination = {};
+
+        if (endIndex < totalDocs) {
+            pagination.next = {
+                page: page + 1,
+                limit
+            }
+        }
+
+        if (startIndex > 0) {
+            pagination.prev = {
+                page: page - 1,
+                limit
+            }
+        }
+
         res.status(201).json({
             success: true,
             msg: `Bootcamp created`,
             count: bootcamp.length,
+            pagination,
             data: bootcamp
         });
 
