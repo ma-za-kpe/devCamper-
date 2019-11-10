@@ -119,8 +119,8 @@ module.exports = {
 
         res.status(201).json({
             success: true,
-            msg: `course Updates`,
-            data: course
+            msg: `course Deleted`,
+            data: {}
         });
 
 
