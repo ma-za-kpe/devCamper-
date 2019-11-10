@@ -1,6 +1,12 @@
 var express = require('express');
+
+//other reaource routers
+const courseRouter = require('./courses');
+
 var router = express.Router();
 
+//re-route into other resources routers
+router.use('/:bootcampId/courses', courseRouter);
 
 // controllers
 const BootcampController = require('../controllers/bootcamp.controller');
