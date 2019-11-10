@@ -100,6 +100,13 @@ const BootcampSchema = new mongoose.Schema({
         default: Date.now
     },
 
+}, {
+    toJSON: {
+        virtuals: true
+    },
+    toObject: {
+        virtuals: true
+    }
 });
 
 //create bootcamp slug from the name
@@ -108,6 +115,14 @@ BootcampSchema.pre('save', function (next) {
         lower: true
     })
     next();
+});
+
+//reverse populate with virtuals (field called courses and an array for all the courses in that bootcamp.)
+BootcampSchema.virtual('courses', {
+    ref: 'Course',
+    localField: '_id',
+    foreignField: 'bootcamp',
+    justOne: false
 });
 
 //Geocode and create location field
