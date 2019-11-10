@@ -34,6 +34,12 @@ module.exports = {
         //finding resource
         query = Bootcamp.find(JSON.parse(queryStr));
 
+        // select fields
+        if (req.query.select) {
+            const fields = req.query.select.split('.').join(' ')
+            console.log(fields)
+        }
+
         //excecuting query
         const bootcamp = await query;
         res.status(201).json({
