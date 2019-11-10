@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 const pe = require('parse-error');
+const dotenv = require('dotenv');
 
 // routes
 var indexRouter = require('./routes/index');
@@ -13,6 +14,11 @@ var bootcampsRouter = require('./routes/bootcamps');
 const errorResponse = require('./utils/errorResponse')
 
 var app = express();
+
+// Load env vars
+dotenv.config({
+  path: __dirname + '/.env'
+});
 
 // db
 require("./config/db");

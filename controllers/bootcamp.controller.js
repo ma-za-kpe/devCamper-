@@ -1,8 +1,3 @@
-var express = require('express');
-
-var mongoose = require('mongoose')
-var ObjectId = mongoose.Types.ObjectId;
-
 const Bootcamp = require("../models/Bootcamp");
 const errorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/aync');
@@ -44,7 +39,7 @@ module.exports = {
     // @desc  Create bootcamp
     // @route  POST /api/v1/bootcamps
     // @access  Private
-    createBootcamps: asyncHandler(async (req, res, next) => {
+    createBootcamps: asyncHandler(async (req, res) => {
 
         const bootcamp = await Bootcamp.create(req.body);
 
@@ -74,7 +69,7 @@ module.exports = {
 
         res.status(201).json({
             success: true,
-            msg: `Bootcamp Updates`,
+            msg: `Bootcamp Updated`,
             data: bootcamp
         });
 

@@ -5,23 +5,12 @@ const colors = require('colors');
 // Build the connection string 
 var dbURI = 'mongodb://localhost:27017/devCamper';
 
-//db config
-// const db = require('../config/Keys').MongoURI;
-
-// Create the database connection 
-// mongoose.connect(db || dbURI);
-
 //connect to mongo
 mongoose.connect(process.env.MONGODB_URI || dbURI, {
         useNewUrlParser: true
     })
-    .then(console.log('mongoDB connected successfully...'.bgCyan.bold))
+    .then(console.log('mongoDB connected successfully...in DB'.bgCyan.bold))
     .catch(err => console.log(err).red);
-
-// module.exports = {
-//     'JWT_SECRET': 'makusecretkey***',
-//     'JTW_EXPT_TIME': '2m'
-// };
 
 // CONNECTION EVENTS
 // When successfully connected
