@@ -133,6 +133,7 @@ BootcampSchema.virtual('courses', {
     justOne: false
 });
 
+
 //Geocode and create location field
 BootcampSchema.pre('save', async function (next) {
 
