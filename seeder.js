@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 
 // Load env vars
 dotenv.config({
-    path: './config/config.env'
+    path: __dirname + '/.env'
 });
 
 // Load models
@@ -15,7 +15,7 @@ const Bootcamp = require('./models/Bootcamp');
 // const Review = require('./models/Review');
 
 //connect to mongo
-mongoose.connect(String(process.env.MONGODB_URI), {
+mongoose.connect(process.env.MONGODB_URI || process.env.LOCAL_DB_URI, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: false,
@@ -48,7 +48,7 @@ const importData = async () => {
         // await Course.create(courses);
         // await User.create(users);
         // await Review.create(reviews);
-        console.log('Data Imported...'.green.inverse);
+        console.log('Data Imported...'.green.bold);
         process.exit();
     } catch (err) {
         console.error(err);
@@ -62,7 +62,7 @@ const deleteData = async () => {
         // await Course.deleteMany();
         // await User.deleteMany();
         // await Review.deleteMany();
-        console.log('Data Destroyed...'.red.inverse);
+        console.log('Data Destroyed...'.red.bold);
         process.exit();
     } catch (err) {
         console.error(err);

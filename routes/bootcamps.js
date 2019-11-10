@@ -5,6 +5,9 @@ var router = express.Router();
 // controllers
 const BootcampController = require('../controllers/bootcamp.controller');
 
+/*get bootcamps in a certain raduis */
+router.route('/radius/:zipcode/:distance').get(BootcampController.getBootcampsInRadius);
+
 /* GET and POST  all bootcamp listing. */
 router.route('/').get(BootcampController.getAllBootcamps).post(BootcampController.createBootcamps);
 

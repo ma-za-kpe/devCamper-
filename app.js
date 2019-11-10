@@ -13,15 +13,17 @@ var usersRouter = require('./routes/users');
 var bootcampsRouter = require('./routes/bootcamps');
 const errorResponse = require('./utils/errorResponse')
 
-var app = express();
+// db
+require("./config/db");
 
 // Load env vars
 dotenv.config({
   path: __dirname + '/.env'
 });
 
-// db
-require("./config/db");
+
+
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
