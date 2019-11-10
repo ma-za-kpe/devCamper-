@@ -152,11 +152,13 @@ module.exports = {
 
         console.log("id is ........" + req.params.id)
 
-        const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id, req.body);
+        const bootcamp = await Bootcamp.findById(req.params.id, req.body);
 
         if (!bootcamp) {
             return next(new errorResponse(`Bootcamp not found with id of ${req.params.id}`, 400))
         }
+
+        bootcamp.remove();
 
         res.status(201).json({
             success: true,
