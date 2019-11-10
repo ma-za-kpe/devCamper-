@@ -32,7 +32,10 @@ module.exports = {
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
         //finding resource
-        query = Bootcamp.find(JSON.parse(queryStr));
+        query = Bootcamp.find(JSON.parse(queryStr)).populate({
+            path: 'course',
+            select: 'name description'
+        });
 
         // select fields
         if (req.query.select) {
