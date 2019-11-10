@@ -11,6 +11,7 @@ const dotenv = require('dotenv');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var bootcampsRouter = require('./routes/bootcamps');
+var coursessRouter = require('./routes/courses');
 const errorResponse = require('./utils/errorResponse')
 
 // db
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1', indexRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/bootcamps', bootcampsRouter);
+app.use('/api/v1/courses', coursessRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

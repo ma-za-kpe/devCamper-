@@ -77,7 +77,7 @@ module.exports = {
 
         res.status(201).json({
             success: true,
-            msg: `Bootcamp created`,
+            msg: `All Bootcamps`,
             count: bootcamp.length,
             pagination,
             data: bootcamp
