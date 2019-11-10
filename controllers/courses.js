@@ -3,6 +3,7 @@ const geocoder = require('../utils/geocoder');
 const asyncHandler = require('../middleware/aync');
 
 const Course = require("../models/Course");
+const Bootcamp = require("../models/Bootcamp");
 
 module.exports = {
     // @desc  Get all courses
@@ -61,7 +62,7 @@ module.exports = {
 
         req.body.bootcamp = req.params.bootcampId;
 
-        const bootcamp = await bootcamp.findById(req.params.bootcampId);
+        const bootcamp = await Bootcamp.findById(req.params.bootcampId);
 
         if (!bootcamp) {
             return next(new errorResponse(`bootcamp not found with id of ${req.params.bootcampId}`, 400))

@@ -3,7 +3,7 @@ var express = require('express');
 // controllers
 const CourseController = require('../controllers/courses');
 
-//merging perams
+//merging params
 const router = express.Router({
     mergeParams: true
 });
