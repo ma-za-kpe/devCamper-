@@ -18,7 +18,7 @@ module.exports = {
         };
 
         //fields to exclude
-        const removeFields = ['select', 'sort']
+        const removeFields = ['select', 'sort', 'limit', 'page']
 
         //loop over removeFields and delete them from the req   q   uery
         removeFields.forEach(param => delete reqQuery[param]);
@@ -45,6 +45,13 @@ module.exports = {
             const sortFields = req.query.sort.split(',').join(' ')
             query = query.sort(sortFields)
         }
+
+        //paginationg
+        const page = parseInt(req.query.page, 10) || 1;
+        const limit = parseInt(req.query.limit, 10) || 1;
+        const skip = (page - 1) * limit;
+
+        query = query.skip(skip).limit(limit);
 
         //excecuting query
         const bootcamp = await query;
