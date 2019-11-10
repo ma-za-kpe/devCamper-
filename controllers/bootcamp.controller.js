@@ -36,7 +36,7 @@ module.exports = {
 
         // select fields
         if (req.query.select) {
-            const fields = req.query.select.split('.').join(' ')
+            const fields = req.query.select.split(',').join(' ')
             console.log(fields)
         }
 
