@@ -21,7 +21,7 @@ module.exports = {
         const removeFields = ['select']
 
         //loop over removeFields and delete them from the req   q   uery
-        removeFields.forEach(param => reqQuery[param]);
+        removeFields.forEach(param => delete reqQuery[param]);
 
         console.log(reqQuery)
 
