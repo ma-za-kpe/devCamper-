@@ -12,12 +12,29 @@ module.exports = {
 
         let query;
 
-        let queryStr = JSON.stringify(req.query);
+        //coppy req.query
+        const reqQuery = {
+            ...req.query
+        };
 
+        //fields to exclude
+        const removeFields = ['select']
+
+        //loop over removeFields and delete them from the req   q   uery
+        removeFields.forEach(param => reqQuery[param]);
+
+        console.log(reqQuery)
+
+        //create query string
+        let queryStr = JSON.stringify(reqQuery);
+
+        //create operators
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
+        //finding resource
         query = Bootcamp.find(JSON.parse(queryStr));
 
+        //excecuting query
         const bootcamp = await query;
         res.status(201).json({
             success: true,
