@@ -21,5 +21,5 @@ router.route('/').get(BootcampController.getAllBootcamps).post(BootcampControlle
 router.route('/:id').get(BootcampController.getOneBootcamps).put(BootcampController.updateBootcamps).delete(BootcampController.deleteBootcamps);
 
 /* upload photo */
-router.route('/:id/photo').put(BootcampController.bootcampPhotoUpload);
+router.route('/:id/photo').put(BootcampController.putbootcampPhotoUpload);
 module.exports = router;
