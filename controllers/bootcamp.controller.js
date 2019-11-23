@@ -228,7 +228,7 @@ module.exports = {
 
         const file = req.files.file;
 
-        console.log(req.files)
+        console.log(file)
 
         // Make sure the image is a photo
         if (!file.mimetype.startsWith('image')) {
