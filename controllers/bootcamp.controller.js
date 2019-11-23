@@ -218,15 +218,15 @@ module.exports = {
             );
         }
 
-        // Make sure user is bootcamp owner
-        if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
-            return next(
-                new ErrorResponse(
-                    `User ${req.params.id} is not authorized to update this bootcamp`,
-                    401
-                )
-            );
-        }
+        // // Make sure user is bootcamp owner
+        // if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        //     return next(
+        //         new ErrorResponse(
+        //             `User ${req.params.id} is not authorized to update this bootcamp`,
+        //             401
+        //         )
+        //     );
+        // }
 
         if (!req.files) {
             return next(new ErrorResponse(`Please upload a file`, 400));
@@ -234,39 +234,41 @@ module.exports = {
 
         const file = req.files.file;
 
-        // Make sure the image is a photo
-        if (!file.mimetype.startsWith('image')) {
-            return next(new ErrorResponse(`Please upload an image file`, 400));
-        }
+        console.log(file)
 
-        // Check filesize
-        if (file.size > process.env.MAX_FILE_UPLOAD) {
-            return next(
-                new ErrorResponse(
-                    `Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`,
-                    400
-                )
-            );
-        }
+        // // Make sure the image is a photo
+        // if (!file.mimetype.startsWith('image')) {
+        //     return next(new ErrorResponse(`Please upload an image file`, 400));
+        // }
 
-        // Create custom filename
-        file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
+        // // Check filesize
+        // if (file.size > process.env.MAX_FILE_UPLOAD) {
+        //     return next(
+        //         new ErrorResponse(
+        //             `Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`,
+        //             400
+        //         )
+        //     );
+        // }
 
-        file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
-            if (err) {
-                console.error(err);
-                return next(new ErrorResponse(`Problem with file upload`, 500));
-            }
+        // // Create custom filename
+        // file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
 
-            await Bootcamp.findByIdAndUpdate(req.params.id, {
-                photo: file.name
-            });
+        // file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+        //     if (err) {
+        //         console.error(err);
+        //         return next(new ErrorResponse(`Problem with file upload`, 500));
+        //     }
 
-            res.status(200).json({
-                success: true,
-                data: file.name
-            });
-        });
+        //     await Bootcamp.findByIdAndUpdate(req.params.id, {
+        //         photo: file.name
+        //     });
+
+        //     res.status(200).json({
+        //         success: true,
+        //         data: file.name
+        //     });
+        // });
 
     })
 };
