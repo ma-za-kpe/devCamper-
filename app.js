@@ -6,6 +6,7 @@ var logger = require('morgan');
 const cors = require('cors');
 const pe = require('parse-error');
 const dotenv = require('dotenv');
+const fileupload = require('express-fileupload');
 
 // routes
 var indexRouter = require('./routes/index');
@@ -37,7 +38,7 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(fileupload())
 app.use('/api/v1', indexRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/bootcamps', bootcampsRouter);

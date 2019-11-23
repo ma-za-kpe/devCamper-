@@ -20,4 +20,6 @@ router.route('/').get(BootcampController.getAllBootcamps).post(BootcampControlle
 /* GET bootcamp listing, UPDATE bootcamp listing, DELETE bootcamp listing. */
 router.route('/:id').get(BootcampController.getOneBootcamps).put(BootcampController.updateBootcamps).delete(BootcampController.deleteBootcamps);
 
+/* upload photo */
+router.route('/:id/photo').put(BootcampController.bootcampPhotoUpload);
 module.exports = router;
