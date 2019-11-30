@@ -211,7 +211,7 @@ module.exports = {
     // @desc      Upload photo for bootcamp
     // @route     PUT /api/v1/bootcamps/:id/photo
     // @access    Private
-    putbootcampPhotoUpload: asyncHandler(async (req, res, next) => {
+    bootcampPhotoUpload: asyncHandler(async (req, res, next) => {
         const bootcamp = await Bootcamp.findById(req.params.id);
 
         if (!bootcamp) {
@@ -220,15 +220,21 @@ module.exports = {
             );
         }
 
-        if (!req.files) {
+        // Make sure user is bootcamp owner
+        if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
             return next(
-                new ErrorResponse(`Please upload a file`, 400)
+                new ErrorResponse(
+                    `User ${req.params.id} is not authorized to update this bootcamp`,
+                    401
+                )
             );
         }
 
-        const file = req.files.file;
+        if (!req.files) {
+            return next(new ErrorResponse(`Please upload a file`, 400));
+        }
 
-        console.log(file)
+        const file = req.files.file;
 
         // Make sure the image is a photo
         if (!file.mimetype.startsWith('image')) {
@@ -263,6 +269,5 @@ module.exports = {
                 data: file.name
             });
         });
-
     })
-};
+}
