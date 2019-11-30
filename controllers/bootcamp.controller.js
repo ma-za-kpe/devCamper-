@@ -256,20 +256,20 @@ module.exports = {
 
         console.log(file.name)
 
-        // file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
-        //     if (err) {
-        //         console.error(err);
-        //         return next(new errorResponse(`Problem with file upload`, 500));
-        //     }
+        file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+            if (err) {
+                console.error(err);
+                return next(new errorResponse(`Problem with file upload`, 500));
+            }
 
-        //     await Bootcamp.findByIdAndUpdate(req.params.id, {
-        //         photo: file.name
-        //     });
+            await Bootcamp.findByIdAndUpdate(req.params.id, {
+                photo: file.name
+            });
 
-        //     res.status(200).json({
-        //         success: true,
-        //         data: file.name
-        //     });
-        // });
+            res.status(200).json({
+                success: true,
+                data: file.name
+            });
+        });
     })
 }
