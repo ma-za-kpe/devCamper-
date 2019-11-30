@@ -254,20 +254,22 @@ module.exports = {
         // Create custom filename
         file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
 
-        file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
-            if (err) {
-                console.error(err);
-                return next(new errorResponse(`Problem with file upload`, 500));
-            }
+        console.log(file.name)
 
-            await Bootcamp.findByIdAndUpdate(req.params.id, {
-                photo: file.name
-            });
+        // file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+        //     if (err) {
+        //         console.error(err);
+        //         return next(new errorResponse(`Problem with file upload`, 500));
+        //     }
 
-            res.status(200).json({
-                success: true,
-                data: file.name
-            });
-        });
+        //     await Bootcamp.findByIdAndUpdate(req.params.id, {
+        //         photo: file.name
+        //     });
+
+        //     res.status(200).json({
+        //         success: true,
+        //         data: file.name
+        //     });
+        // });
     })
 }
