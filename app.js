@@ -18,10 +18,15 @@ const errorResponse = require('./utils/errorResponse')
 // db
 require("./config/db");
 
-// Load env vars
-// dotenv.config({
-//   path: __dirname + "./config/config.env"
-// });
+
+if (result.error) {
+  if (process.env.NODE_ENV === "production" && result.error.code === "ENOENT") {
+    console.info("expected this error because we are in production without a .env file")
+  } else {
+    throw result.error
+  }
+}
+
 dotenv.config({
   path: __dirname + '/.env'
 });
