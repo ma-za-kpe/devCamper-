@@ -25,7 +25,7 @@ require("./config/db");
 //   path: __dirname + "./config/config.env"
 // });
 dotenv.config({
-  path: __dirname + "/.env"
+  path: __dirname + ".env"
 });
 
 
