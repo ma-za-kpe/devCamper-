@@ -14,16 +14,14 @@ var bootcampsRouter = require("./routes/bootcamps");
 var coursessRouter = require("./routes/courses");
 const errorResponse = require("./utils/errorResponse");
 
-//dotenv
-// require("dotenv").config({ silent: true });
 
 // db
 require("./config/db");
 
-// dotenv.config({
-//   path: __dirname + '/.env',
-//   silent: true
-// });
+dotenv.config({
+  path: __dirname + '/.env',
+  silent: true
+});
 
 var app = express();
 
