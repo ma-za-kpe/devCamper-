@@ -19,15 +19,9 @@ const errorResponse = require('./utils/errorResponse')
 require("./config/db");
 
 // Load env vars
-// dotenv.config({
-//   path: __dirname + '/.env'
-// });
-
-require('dotenv').config({
+dotenv.config({
   path: __dirname + '/.env'
-})
-
-
+});
 
 
 var app = express();
