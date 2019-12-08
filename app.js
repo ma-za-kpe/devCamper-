@@ -30,7 +30,7 @@ var app = express();
 // Set static folder
 app.use(express.static('./public'));
 // app.use(express.static(path.resolve('./public')));
-
+// app.use(express.static(path.join(__dirname,'public')));
 // app.use('/uploads', express.static(path.join(__dirname, './public')));
 // app.use('/uploads', express.static(__dirname + '/public'));
 

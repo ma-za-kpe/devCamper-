@@ -254,7 +254,8 @@ module.exports = {
         // Create custom filename
         file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
 
-        console.log(file.name)
+        console.log("----------" + file.name)
+        console.log(".........." + process.env.MAX_FILE_UPLOAD);
 
         file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
             if (err) {
