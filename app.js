@@ -15,6 +15,8 @@ var bootcampsRouter = require('./routes/bootcamps');
 var coursessRouter = require('./routes/courses');
 const errorResponse = require('./utils/errorResponse')
 
+console.log(require('dotenv').config())
+
 // db
 require("./config/db");
 
