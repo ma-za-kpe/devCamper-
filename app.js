@@ -16,7 +16,7 @@ var coursessRouter = require("./routes/courses");
 const errorResponse = require("./utils/errorResponse");
 
 //dotenv
-require("dotenv").config();
+require("dotenv").config({ silent: true });
 
 // db
 require("./config/db");
