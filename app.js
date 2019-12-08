@@ -19,7 +19,8 @@ const errorResponse = require('./utils/errorResponse')
 require("./config/db");
 
 dotenv.config({
-  path: __dirname + '/.env'
+  path: __dirname + '/.env',
+  silent: true
 });
 
 
@@ -63,14 +64,6 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  if (result.err) {
-    if (process.env.NODE_ENV === "production" && result.err.code === "ENOENT") {
-      console.info("expected this error because we are in production without a .env file")
-    } else {
-      throw result.error
-    }
-  }
 
   //get custome errors
   let error = {
