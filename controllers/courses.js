@@ -1,5 +1,4 @@
 const errorResponse = require('../utils/errorResponse');
-// const geocoder = require('../utils/geocoder');
 const asyncHandler = require('../middleware/aync');
 
 const Course = require("../models/Course");

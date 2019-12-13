@@ -1,15 +1,9 @@
 const errorResponse = require('../utils/errorResponse');
-const geocoder = require('../utils/geocoder');
 const asyncHandler = require('../middleware/aync');
 const path = require('path');
 
 
 const Bootcamp = require("../models/Bootcamp");
-
-require('dotenv').config({
-    path: __dirname + '/.env',
-    silent: true
-})
 
 module.exports = {
     // @desc  Get all bootcamps

@@ -18,16 +18,6 @@ const errorResponse = require("./utils/errorResponse");
 // db
 require("./config/db");
 
-// require('dotenv').config({
-//   path: __dirname + '/.env',
-//   silent: true
-// })
-
-
-
-// Load env vars
-// dotenv.config({ path: './config/config.env' });
-
 var app = express();
 
 // Set static folder
