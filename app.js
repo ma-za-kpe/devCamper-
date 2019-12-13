@@ -23,11 +23,17 @@ dotenv.config({
   silent: true
 });
 
+
+// Load env vars
+// dotenv.config({ path: './config/config.env' });
+
 var app = express();
 
 // Set static folder
-app.use(express.static("./public"));
-// app.use(express.static(path.resolve('./public')));
+app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(__dirname + '/public'));
+
+
 // app.use(express.static(path.join(__dirname,'public')));
 // app.use('/uploads', express.static(path.join(__dirname, './public')));
 // app.use('/uploads', express.static(__dirname + '/public'));
