@@ -1,5 +1,6 @@
 const NodeGeocoder = require('node-geocoder');
 
+const dotenv = require('dotenv');
 
 // Load env vars
 require('dotenv').config({
