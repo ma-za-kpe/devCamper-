@@ -6,6 +6,11 @@ const path = require('path');
 
 const Bootcamp = require("../models/Bootcamp");
 
+require('dotenv').config({
+    path: __dirname + '/.env',
+    silent: true
+})
+
 module.exports = {
     // @desc  Get all bootcamps
     // @route  GET /api/v1/bootcamps
