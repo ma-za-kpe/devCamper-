@@ -13,7 +13,7 @@ var usersRouter = require("./routes/users");
 var bootcampsRouter = require("./routes/bootcamps");
 var coursessRouter = require("./routes/courses");
 const errorResponse = require("./utils/errorResponse");
-
+var auth = require("./routes/auth");
 
 // db
 require("./config/db");
@@ -44,7 +44,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileupload());
 app.use("/api/v1", indexRouter);
-app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/auth", auth);
 app.use("/api/v1/bootcamps", bootcampsRouter);
 app.use("/api/v1/courses", coursessRouter);
 
