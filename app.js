@@ -18,10 +18,10 @@ const errorResponse = require("./utils/errorResponse");
 // db
 require("./config/db");
 
-require('dotenv').config({
-  path: __dirname + '/.env',
-  silent: true
-})
+// require('dotenv').config({
+//   path: __dirname + '/.env',
+//   silent: true
+// })
 
 
 
