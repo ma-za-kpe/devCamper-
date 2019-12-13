@@ -18,10 +18,11 @@ const errorResponse = require("./utils/errorResponse");
 // db
 require("./config/db");
 
-dotenv.config({
+require('dotenv').config({
   path: __dirname + '/.env',
   silent: true
-});
+})
+
 
 
 // Load env vars
