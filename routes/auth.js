@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.use('/register', AuthController.registerUser);
 
-// router.post('/login', login);
+router.post('/login', AuthController.loginUser);
 // router.get('/logout', logout);
 // router.get('/me', protect, getMe);
 // router.put('/updatedetails', protect, updateDetails);
