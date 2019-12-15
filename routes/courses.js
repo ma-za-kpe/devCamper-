@@ -21,7 +21,7 @@ router.route('/')
     .post(ProtectionController.protect, CourseController.createCourse);
 
 /* GET and POST  all bootcamp listing. */
-router.route('/:id').get(CourseController.getOneCourse).put(protect, CourseController.updateCourse).delete(protect, CourseController.deleteCourse);
+router.route('/:id').get(CourseController.getOneCourse).put(ProtectionController.protect, CourseController.updateCourse).delete(ProtectionController.protect, CourseController.deleteCourse);
 
 
 
