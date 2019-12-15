@@ -19,11 +19,11 @@ const BootcampController = require('../controllers/bootcamp.controller');
 router.route('/radius/:zipcode/:distance').get(BootcampController.getBootcampsInRadius);
 
 /* GET and POST  all bootcamp listing. */
-router.route('/').get(advancedResults(Bootcamp, 'courses'), BootcampController.getAllBootcamps).post(ProtectionController.protect, BootcampController.createBootcamps);
+router.route('/').get(advancedResults(Bootcamp, 'courses'), BootcampController.getAllBootcamps).post(ProtectionController.protect, ProtectionController.authorize("publisher", "admin"), BootcampController.createBootcamps);
 
 /* GET bootcamp listing, UPDATE bootcamp listing, DELETE bootcamp listing. */
-router.route('/:id').get(BootcampController.getOneBootcamps).put(ProtectionController.protect, BootcampController.updateBootcamps).delete(ProtectionController.protect, BootcampController.deleteBootcamps);
+router.route('/:id').get(BootcampController.getOneBootcamps).put(ProtectionController.protect, ProtectionController.authorize("publisher", "admin"), BootcampController.updateBootcamps).delete(ProtectionController.protect, ProtectionController.authorize("publisher", "admin"), BootcampController.deleteBootcamps);
 
 /* upload photo */
-router.route('/:id/photo').put(ProtectionController.protect, BootcampController.bootcampPhotoUpload);
+router.route('/:id/photo').put(ProtectionController.protect, ProtectionController.authorize("publisher", "admin"), BootcampController.bootcampPhotoUpload);
 module.exports = router;

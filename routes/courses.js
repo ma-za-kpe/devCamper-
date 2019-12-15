@@ -18,10 +18,10 @@ router.route('/')
         path: 'bootcamp',
         select: 'name description'
     }), CourseController.getAllCourses)
-    .post(ProtectionController.protect, CourseController.createCourse);
+    .post(ProtectionController.protect, ProtectionController.authorize("publisher", "admin"), CourseController.createCourse);
 
 /* GET and POST  all bootcamp listing. */
-router.route('/:id').get(CourseController.getOneCourse).put(ProtectionController.protect, CourseController.updateCourse).delete(ProtectionController.protect, CourseController.deleteCourse);
+router.route('/:id').get(CourseController.getOneCourse).put(ProtectionController.protect, ProtectionController.authorize("publisher", "admin"), CourseController.updateCourse).delete(ProtectionController.protect, ProtectionController.authorize("publisher", "admin"), CourseController.deleteCourse);
 
 
 
