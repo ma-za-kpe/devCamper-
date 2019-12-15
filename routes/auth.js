@@ -2,6 +2,7 @@ const express = require('express');
 
 // controllers
 const AuthController = require('../controllers/auth');
+const Protection = require('../middleware/auth')
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.use('/register', AuthController.registerUser);
 
 router.post('/login', AuthController.loginUser);
 // router.get('/logout', logout);
-// router.get('/me', protect, getMe);
+router.get('/me', Protection.protect, getMe);
 // router.put('/updatedetails', protect, updateDetails);
 // router.put('/updatepassword', protect, updatePassword);
 // router.post('/forgotpassword', forgotPassword);
