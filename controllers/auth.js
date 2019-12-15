@@ -1,5 +1,5 @@
 // const crypto = require("crypto");
-// const ErrorResponse = require("../utils/errorResponse");
+const errorResponse = require('../utils/errorResponse');
 // const sendEmail = require("../utils/sendEmail");
 const asyncHandler = require('../middleware/aync');
 
@@ -47,7 +47,7 @@ module.exports = {
 
         // Validate emil & password
         if (!email || !password) {
-            return next(new ErrorResponse('Please provide an email and password', 400));
+            return next(new errorResponse('Please provide an email and password', 400));
         }
 
         // Check for user
@@ -56,14 +56,14 @@ module.exports = {
         }).select('+password');
 
         if (!user) {
-            return next(new ErrorResponse('Invalid credentials', 401));
+            return next(new errorResponse('Invalid credentials', 401));
         }
 
         // Check if password matches
         const isMatch = await user.matchPassword(password);
 
         if (!isMatch) {
-            return next(new ErrorResponse('Invalid credentials', 401));
+            return next(new errorResponse('Invalid credentials', 401));
         }
 
         // create token
