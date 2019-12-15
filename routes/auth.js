@@ -14,7 +14,7 @@ router.use('/register', AuthController.registerUser);
 
 router.post('/login', AuthController.loginUser);
 // router.get('/logout', logout);
-router.get('/me', Protection.protect, getMe);
+router.get('/me', Protection.protect, AuthController.getMe);
 // router.put('/updatedetails', protect, updateDetails);
 // router.put('/updatepassword', protect, updatePassword);
 // router.post('/forgotpassword', forgotPassword);
