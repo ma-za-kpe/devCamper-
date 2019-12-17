@@ -1,6 +1,3 @@
-var express = require('express');
-var router = express.Router();
-
 const asyncHandler = require('../middleware/aync');
 const User = require('../models/User');
 
@@ -62,4 +59,3 @@ module.exports = {
         });
     })
 }
-module.exports = router;
