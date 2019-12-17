@@ -73,18 +73,31 @@ module.exports = {
 
         console.log("id is ........" + req.params.id)
 
-        const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+        let bootcamp = await Bootcamp.findById(req.params.id);
+
+        if (!bootcamp) {
+            return next(
+                new errorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
+            );
+        }
+
+        // Make sure user is bootcamp owner
+        if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+            return next(
+                new ErrorResponse(
+                    `User ${req.params.id} is not authorized to update this bootcamp`,
+                    401
+                )
+            );
+        }
+
+        bootcamp = await Bootcamp.findOneAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true
         });
 
-        if (!bootcamp) {
-            return next(new errorResponse(`Bootcamp not found with id of ${req.params.id}`, 400))
-        }
-
-        res.status(201).json({
+        res.status(200).json({
             success: true,
-            msg: `Bootcamp Updated`,
             data: bootcamp
         });
 
@@ -97,21 +110,30 @@ module.exports = {
 
         console.log("id is ........" + req.params.id)
 
-        const bootcamp = await Bootcamp.findById(req.params.id, req.body);
+        const bootcamp = await Bootcamp.findById(req.params.id);
 
         if (!bootcamp) {
-            return next(new errorResponse(`Bootcamp not found with id of ${req.params.id}`, 400))
+            return next(
+                new errorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
+            );
+        }
+
+        // Make sure user is bootcamp owner
+        if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+            return next(
+                new errorResponse(
+                    `User ${req.params.id} is not authorized to delete this bootcamp`,
+                    401
+                )
+            );
         }
 
         bootcamp.remove();
 
-        res.status(201).json({
+        res.status(200).json({
             success: true,
-            msg: `Bootcamp Updates`,
-            data: bootcamp
+            data: {}
         });
-
-
     }),
 
     // @desc      Get bootcamps within a radius
@@ -163,15 +185,15 @@ module.exports = {
             );
         }
 
-        // // Make sure user is bootcamp owner
-        // if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
-        //     return next(
-        //         new ErrorResponse(
-        //             `User ${req.params.id} is not authorized to update this bootcamp`,
-        //             401
-        //         )
-        //     );
-        // }
+        // Make sure user is bootcamp owner
+        if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+            return next(
+                new ErrorResponse(
+                    `User ${req.params.id} is not authorized to update this bootcamp photo`,
+                    401
+                )
+            );
+        }
 
         if (!req.files) {
             return next(new errorResponse(`Please upload a file`, 400));
