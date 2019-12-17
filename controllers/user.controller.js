@@ -53,7 +53,7 @@ module.exports = {
     // @desc      Delete user
     // @route     DELETE /api/v1/users/:id
     // @access    Private/Admin
-    deleteUser = asyncHandler(async (req, res, next) => {
+    deleteUser: asyncHandler(async (req, res, next) => {
         await User.findByIdAndDelete(req.params.id);
 
         res.status(200).json({
