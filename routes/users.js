@@ -1,36 +1,30 @@
 const express = require('express');
-const {
-  getUsers,
-  getUser,
-  createUser,
-  updateUser,
-  deleteUser
-} = require('../controllers/user.controller');
 
 const User = require('../models/User');
+// controllers
+const UserController = require('../controllers/user.controller');
+
 
 const router = express.Router({
   mergeParams: true
 });
 
 const advancedResults = require('../middleware/advancedResults');
-const {
-  protect,
-  authorize
-} = require('../middleware/auth');
+const ProtectionController = require('../middleware/auth');
 
-router.use(protect);
-router.use(authorize('admin'));
+
+router.use(ProtectionController.protect);
+router.use(ProtectionController.authorize('admin'));
 
 router
   .route('/')
-  .get(advancedResults(User), getUsers)
-  .post(createUser);
+  .get(advancedResults(User), UserController.getUsers)
+  .post(UserController.createUser);
 
 router
   .route('/:id')
-  .get(getUser)
-  .put(updateUser)
-  .delete(deleteUser);
+  .get(UserController.getUser)
+  .put(UserController.updateUser)
+  .delete(UserController.deleteUser);
 
 module.exports = router;
