@@ -84,7 +84,7 @@ module.exports = {
         // Make sure user is bootcamp owner
         if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
             return next(
-                new ErrorResponse(
+                new errorResponse(
                     `User ${req.params.id} is not authorized to update this bootcamp`,
                     401
                 )
@@ -188,7 +188,7 @@ module.exports = {
         // Make sure user is bootcamp owner
         if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
             return next(
-                new ErrorResponse(
+                new errorResponse(
                     `User ${req.params.id} is not authorized to update this bootcamp photo`,
                     401
                 )
