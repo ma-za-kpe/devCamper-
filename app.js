@@ -47,6 +47,8 @@ app.use("/api/v1", indexRouter);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/bootcamps", bootcampsRouter);
 app.use("/api/v1/courses", coursessRouter);
+app.use("/api/v1/users", usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
