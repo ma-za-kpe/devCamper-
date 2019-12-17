@@ -4,8 +4,6 @@ var router = express.Router();
 const asyncHandler = require('../middleware/aync');
 const User = require('../models/User');
 
-const User = require("../models/User");
-
 module.exports = {
     // @desc      Get all users
     // @route     GET /api/v1/users
