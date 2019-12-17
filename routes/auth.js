@@ -6,10 +6,6 @@ const Protection = require('../middleware/auth')
 
 const router = express.Router();
 
-// const {
-//     protect
-// } = require('../middleware/auth');
-
 router.use('/register', AuthController.registerUser);
 
 router.post('/login', AuthController.loginUser);
