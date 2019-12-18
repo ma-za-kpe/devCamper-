@@ -14,6 +14,8 @@ var bootcampsRouter = require("./routes/bootcamps");
 var coursessRouter = require("./routes/courses");
 const errorResponse = require("./utils/errorResponse");
 var auth = require("./routes/auth");
+var reviewsRouter = require("./routes/reviews");
+
 
 // db
 require("./config/db");
@@ -48,7 +50,7 @@ app.use("/api/v1/auth", auth);
 app.use("/api/v1/bootcamps", bootcampsRouter);
 app.use("/api/v1/courses", coursessRouter);
 app.use("/api/v1/users", usersRouter);
-
+app.use("/api/v1/reviews", reviewsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
