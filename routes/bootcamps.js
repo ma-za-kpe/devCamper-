@@ -2,6 +2,8 @@ var express = require('express');
 
 //other reaource routers
 const courseRouter = require('./courses');
+const reviewRouter = require('./reviews');
+
 
 const Bootcamp = require('../models/Bootcamp');
 const advancedResults = require('../middleware/advancedResults');
@@ -11,6 +13,7 @@ var router = express.Router();
 
 //re-route into other resources routers
 router.use('/:bootcampId/courses', courseRouter);
+router.use('/:bootcampId/reviews', reviewRouter);
 
 // controllers
 const BootcampController = require('../controllers/bootcamp.controller');
