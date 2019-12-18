@@ -1,11 +1,4 @@
 const express = require('express');
-const {
-    getReviews,
-    getReview,
-    addReview,
-    updateReview,
-    deleteReview
-} = require('../controllers/reviews');
 
 const Review = require('../models/Review');
 
@@ -16,7 +9,6 @@ const router = express.Router({
 //other reaource routers
 const courseRouter = require('./courses');
 
-const Review = require('../models/Reviews');
 const advancedResults = require('../middleware/advancedResults');
 const ProtectionController = require('../middleware/auth');
 
