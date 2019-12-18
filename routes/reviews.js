@@ -6,9 +6,6 @@ const router = express.Router({
     mergeParams: true
 });
 
-//other reaource routers
-const courseRouter = require('./courses');
-
 const advancedResults = require('../middleware/advancedResults');
 const ProtectionController = require('../middleware/auth');
 
@@ -17,13 +14,10 @@ const ReviewController = require('../controllers/reviews');
 
 router
     .route('/')
-    .get(
-        advancedResults(Review, {
-            path: 'bootcamp',
-            select: 'name description'
-        }),
-        ReviewController.getReviews
-    )
+    .get(advancedResults(Review, {
+        path: 'bootcamp',
+        select: 'name description'
+    }), ReviewController.getReviews)
     .post(ProtectionController.protect, ProtectionController.authorize('user', 'admin'), ReviewController.addReview);
 
 router
