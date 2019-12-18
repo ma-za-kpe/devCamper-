@@ -12,7 +12,7 @@ dotenv.config({
 const Bootcamp = require('./models/Bootcamp');
 const Course = require('./models/Course');
 const User = require('./models/User');
-const Review = require('./models/Review');
+const Review = require('./models/Reviews');
 
 //connect to mongo
 mongoose.connect(process.env.MONGODB_URI || process.env.LOCAL_DB_URI, {
