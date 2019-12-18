@@ -24,12 +24,12 @@ router
         }),
         ReviewController.getReviews
     )
-//     .post(ProtectionController.protect, ProtectionController.authorize('user', 'admin'), addReview);
+    .post(ProtectionController.protect, ProtectionController.authorize('user', 'admin'), ReviewController.addReview);
 
-// router
-//     .route('/:id')
-//     .get(getReview)
-//     .put(ProtectionController.protect, ProtectionController.authorize('user', 'admin'), updateReview)
-//     .delete(ProtectionController.protect, ProtectionController.authorize('user', 'admin'), deleteReview);
+router
+    .route('/:id')
+    .get(ReviewController.getReview)
+    .put(ProtectionController.protect, ProtectionController.authorize('user', 'admin'), ReviewController.updateReview)
+    .delete(ProtectionController.protect, ProtectionController.authorize('user', 'admin'), ReviewController.deleteReview);
 
 module.exports = router;
