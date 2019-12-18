@@ -50,26 +50,26 @@ module.exports = {
     // @access    Private
     addReview: asyncHandler(async (req, res, next) => {
         console.log("boos bitch")
-        req.body.bootcamp = req.params.bootcampId;
-        req.body.user = req.user.id;
+        // req.body.bootcamp = req.params.bootcampId;
+        // req.body.user = req.user.id;
 
-        const bootcamp = await Bootcamp.findById(req.params.bootcampId);
+        // const bootcamp = await Bootcamp.findById(req.params.bootcampId);
 
-        if (!bootcamp) {
-            return next(
-                new ErrorResponse(
-                    `No bootcamp with the id of ${req.params.bootcampId}`,
-                    404
-                )
-            );
-        }
+        // if (!bootcamp) {
+        //     return next(
+        //         new ErrorResponse(
+        //             `No bootcamp with the id of ${req.params.bootcampId}`,
+        //             404
+        //         )
+        //     );
+        // }
 
-        const review = await Review.create(req.body);
+        // const review = await Review.create(req.body);
 
-        res.status(201).json({
-            success: true,
-            data: review
-        });
+        // res.status(201).json({
+        //     success: true,
+        //     data: review
+        // });
     }),
 
     // @desc      Update review
