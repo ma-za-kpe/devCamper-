@@ -102,7 +102,7 @@ module.exports = {
     // @desc      Delete review
     // @route     DELETE /api/v1/reviews/:id
     // @access    Private
-    deleteReview = asyncHandler(async (req, res, next) => {
+    deleteReview: asyncHandler(async (req, res, next) => {
         const review = await Review.findById(req.params.id);
 
         if (!review) {
