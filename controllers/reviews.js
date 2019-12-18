@@ -49,6 +49,7 @@ module.exports = {
     // @route     POST /api/v1/bootcamps/:bootcampId/reviews
     // @access    Private
     addReview: asyncHandler(async (req, res, next) => {
+        console.log("boos bitch")
         req.body.bootcamp = req.params.bootcampId;
         req.body.user = req.user.id;
 
