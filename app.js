@@ -7,6 +7,11 @@ const cors = require("cors");
 const pe = require("parse-error");
 const fileupload = require("express-fileupload");
 var mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+const cors = require('cors');
 
 // routes
 var indexRouter = require("./routes/index");
@@ -46,6 +51,25 @@ app.use(
 app.use(cookieParser());
 // To remove data, use:
 app.use(mongoSanitize());
+
+// Set security headers
+app.use(helmet());
+
+// Prevent XSS(cross site scripting) attacks
+app.use(xss());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 mins
+  max: 100
+});
+app.use(limiter);
+
+// Prevent http param pollution
+app.use(hpp());
+
+// Enable CORS
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileupload());
 
