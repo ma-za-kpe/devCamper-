@@ -6,6 +6,7 @@ var logger = require("morgan");
 const cors = require("cors");
 const pe = require("parse-error");
 const fileupload = require("express-fileupload");
+var mongoSanitize = require('express-mongo-sanitize');
 
 // routes
 var indexRouter = require("./routes/index");
@@ -43,8 +44,13 @@ app.use(
   })
 );
 app.use(cookieParser());
+// To remove data, use:
+app.use(mongoSanitize());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileupload());
+
+
+//routes
 app.use("/api/v1", indexRouter);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/bootcamps", bootcampsRouter);
@@ -74,7 +80,7 @@ app.use(function (err, req, res, next) {
 
   // mongoose bad object id
   if (err.name === "CastError") {
-    const message = `Resources not found with id of ${err.value}`;
+    const message = `Resources not found`;
     error = new errorResponse(message || 404);
   }
 
