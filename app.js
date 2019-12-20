@@ -3,7 +3,6 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const cors = require("cors");
 const pe = require("parse-error");
 const fileupload = require("express-fileupload");
 var mongoSanitize = require('express-mongo-sanitize');
@@ -70,6 +69,8 @@ app.use(hpp());
 
 // Enable CORS
 app.use(cors());
+
+//using static path
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileupload());
 
