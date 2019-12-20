@@ -7,9 +7,8 @@ const Protection = require('../middleware/auth')
 const router = express.Router();
 
 router.use('/register', AuthController.registerUser);
-
 router.post('/login', AuthController.loginUser);
-// router.get('/logout', logout);
+router.get('/logout', AuthController.logout);
 router.get('/me', Protection.protect, AuthController.getMe);
 router.put('/updatedetails', Protection.protect, AuthController.updateDetails);
 router.put('/updatepassword', Protection.protect, AuthController.updatePassword);
