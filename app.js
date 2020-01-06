@@ -5,12 +5,12 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const pe = require("parse-error");
 const fileupload = require("express-fileupload");
-var mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet');
-const xss = require('xss-clean');
-const rateLimit = require('express-rate-limit');
-const hpp = require('hpp');
-const cors = require('cors');
+var mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
+const xss = require("xss-clean");
+const rateLimit = require("express-rate-limit");
+const hpp = require("hpp");
+const cors = require("cors");
 
 // routes
 var indexRouter = require("./routes/index");
@@ -21,16 +21,14 @@ const errorResponse = require("./utils/errorResponse");
 var auth = require("./routes/auth");
 var reviewsRouter = require("./routes/reviews");
 
-
 // db
 require("./config/db");
 
 var app = express();
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 // app.use(express.static(__dirname + '/public'));
-
 
 // app.use(express.static(path.join(__dirname,'public')));
 // app.use('/uploads', express.static(path.join(__dirname, './public')));
@@ -74,7 +72,6 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileupload());
 
-
 //routes
 app.use("/api/v1", indexRouter);
 app.use("/api/v1/auth", auth);
@@ -84,7 +81,7 @@ app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/reviews", reviewsRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   next(createError(404));
 });
 
@@ -92,7 +89,7 @@ app.use(function (req, res, next) {
 app.use(cors());
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
